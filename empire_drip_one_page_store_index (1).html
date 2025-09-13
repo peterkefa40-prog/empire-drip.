@@ -1,0 +1,223 @@
+<!--
+Empire Drip — One-Page Store
+Files: index.html (this file)
+
+Quick deploy (FREE) using GitHub Pages:
+1. Create a new GitHub repo (public). Name it e.g. empire-drip-store.
+2. Add this index.html to the repo (Upload file or push via git).
+3. In repo Settings > Pages, set branch to main and folder to / (root). Save.
+4. After a minute, your site will be available at https://<your-username>.github.io/empire-drip-store/
+
+How to edit products:
+- Edit the <div class="products"> area and change data attributes and text.
+- Replace image URLs with your own images (hosted or in repo).
+
+Features in this single-file build:
+- Responsive hero + product grid
+- Simple WhatsApp order button (pre-fills order message)
+- Category filter (Shoes / Bags / Hats)
+- Lightweight, no frameworks, mobile-first
+
+Replace sample data with your inventory and images.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Empire Drip — Shoes • Bags • Hats</title>
+  <meta name="description" content="Affordable unisex shoes, bags and hats for everyday hustle" />
+  <style>
+    :root{--accent:#111827;--brand:#f97316;--muted:#6b7280;--card:#ffffff}
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:#f3f4f6; color:#111827}
+    .wrap{max-width:1000px;margin:20px auto;padding:16px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--brand),#ef4444);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    nav a{margin-left:12px;color:var(--muted);text-decoration:none;font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr;gap:16px;background:white;border-radius:12px;padding:20px;margin-top:16px;align-items:center}
+    .hero-inner{display:flex;gap:16px;align-items:center}
+    .hero img{width:220px;height:160px;object-fit:cover;border-radius:10px}
+    h1{margin:0;font-size:20px}
+    p.lead{color:var(--muted);margin:6px 0}
+    .cta{background:var(--brand);color:white;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700}
+    .filters{display:flex;gap:8px;margin:18px 0}
+    .filters button{padding:8px 12px;border-radius:999px;border:1px solid #e5e7eb;background:white;cursor:pointer}
+
+    .products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .card{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 4px 8px rgba(15,23,42,0.04);display:flex;gap:12px;align-items:center}
+    .card img{width:110px;height:88px;object-fit:cover;border-radius:8px}
+    .meta{flex:1}
+    .title{font-weight:700;margin:0}
+    .price{color:var(--brand);font-weight:800}
+    .buy{display:inline-block;margin-top:8px;padding:8px 12px;background:#111827;color:white;border-radius:8px;text-decoration:none;font-weight:700}
+    .badge{font-size:12px;padding:6px 8px;background:#fef3c7;border-radius:999px;color:#92400e;margin-left:8px}
+
+    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
+
+    @media(min-width:720px){
+      .hero{grid-template-columns:1fr 420px}
+      .products{grid-template-columns:repeat(3,1fr)}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">ED</div>
+        <div>
+          <div style="font-weight:800">Empire Drip</div>
+          <div style="font-size:12px;color:var(--muted)">Shoes • Bags • Hats</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Shop</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="home">
+      <div>
+        <h1>Drip that works everywhere</h1>
+        <p class="lead">Unisex shoes, bags and hats built for the hustle. Affordable. Durable. Always in style.</p>
+        <div style="display:flex;gap:10px;margin-top:12px;align-items:center">
+          <a class="cta" href="#products">Shop Latest</a>
+          <a class="cta" href="#contact" style="background:#111827">Order via WhatsApp</a>
+        </div>
+
+        <div class="filters" style="margin-top:18px">
+          <button data-filter="all">All</button>
+          <button data-filter="shoes">Shoes</button>
+          <button data-filter="bags">Bags</button>
+          <button data-filter="hats">Hats</button>
+        </div>
+
+        <div style="margin-top:14px;background:#f8fafc;padding:10px;border-radius:8px;font-size:14px;color:var(--muted)">Featured: Canvas Everyday Sneaker — KSh 2,500 <span class="badge">Best seller</span></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center">
+        <img src="https://images.unsplash.com/photo-1519741496410-3a9f0d7f99f6?auto=format&fit=crop&w=800&q=60" alt="hero image" />
+      </div>
+    </section>
+
+    <section id="products" style="margin-top:18px">
+      <h2 style="margin:8px 0">Products</h2>
+      <div class="products" id="productGrid">
+        <!-- Product card template: data-category, data-name, data-price -->
+
+        <div class="card" data-category="shoes" data-name="Canvas Everyday Sneaker" data-price="2500">
+          <img src="https://images.unsplash.com/photo-1600180758890-9b8b4c3cc1c8?auto=format&fit=crop&w=400&q=60" alt="sneaker" />
+          <div class="meta">
+            <div class="title">Canvas Everyday Sneaker</div>
+            <div style="color:var(--muted);font-size:13px">Neutral, breathable, everyday wear</div>
+            <div class="price">KSh 2,500</div>
+            <a class="buy" href="#" data-name="Canvas Everyday Sneaker" data-price="2500">Order on WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="card" data-category="shoes" data-name="Bold Retro Trainer" data-price="4000">
+          <img src="https://images.unsplash.com/photo-1552346154-2f7b6f3d2b9b?auto=format&fit=crop&w=400&q=60" alt="retro" />
+          <div class="meta">
+            <div class="title">Bold Retro Trainer</div>
+            <div style="color:var(--muted);font-size:13px">Street style, color pop</div>
+            <div class="price">KSh 4,000</div>
+            <a class="buy" href="#" data-name="Bold Retro Trainer" data-price="4000">Order on WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="card" data-category="shoes" data-name="Premium Flex Sneaker" data-price="8500">
+          <img src="https://images.unsplash.com/photo-1618354696826-3b1a9e6c3b9f?auto=format&fit=crop&w=400&q=60" alt="premium" />
+          <div class="meta">
+            <div class="title">Premium Flex Sneaker</div>
+            <div style="color:var(--muted);font-size:13px">Limited edition, premium materials</div>
+            <div class="price">KSh 8,500</div>
+            <a class="buy" href="#" data-name="Premium Flex Sneaker" data-price="8500">Order on WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="card" data-category="bags" data-name="Compact Sling Bag" data-price="1800">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=60" alt="sling" />
+          <div class="meta">
+            <div class="title">Compact Sling Bag</div>
+            <div style="color:var(--muted);font-size:13px">Everyday carry, light</div>
+            <div class="price">KSh 1,800</div>
+            <a class="buy" href="#" data-name="Compact Sling Bag" data-price="1800">Order on WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="card" data-category="bags" data-name="Classic Backpack" data-price="3500">
+          <img src="https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=400&q=60" alt="backpack" />
+          <div class="meta">
+            <div class="title">Classic Backpack</div>
+            <div style="color:var(--muted);font-size:13px">Work + travel friendly</div>
+            <div class="price">KSh 3,500</div>
+            <a class="buy" href="#" data-name="Classic Backpack" data-price="3500">Order on WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="card" data-category="hats" data-name="Plain Snapback Cap" data-price="1200">
+          <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=60" alt="cap" />
+          <div class="meta">
+            <div class="title">Plain Snapback Cap</div>
+            <div style="color:var(--muted);font-size:13px">Minimalist cap, everyday</div>
+            <div class="price">KSh 1,200</div>
+            <a class="buy" href="#" data-name="Plain Snapback Cap" data-price="1200">Order on WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="card" data-category="hats" data-name="Bucket Hat" data-price="1500">
+          <img src="https://images.unsplash.com/photo-1549576490-b0b4831ef60a?auto=format&fit=crop&w=400&q=60" alt="bucket" />
+          <div class="meta">
+            <div class="title">Bucket Hat</div>
+            <div style="color:var(--muted);font-size:13px">Summer vibes</div>
+            <div class="price">KSh 1,500</div>
+            <a class="buy" href="#" data-name="Bucket Hat" data-price="1500">Order on WhatsApp</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contact" style="margin-top:20px;background:white;padding:12px;border-radius:10px">
+      <h3 style="margin:6px 0">Contact / Order</h3>
+      <p style="color:var(--muted);margin:6px 0">Prefer quick orders? Use WhatsApp. Tap any product "Order on WhatsApp" button to start a pre-filled message.</p>
+      <p style="margin:6px 0">Or email: <strong>orders@empiredrip.example</strong></p>
+    </section>
+
+    <footer>
+      Built for hustle — Empire Drip © <span id="year"></span>
+    </footer>
+  </div>
+
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // filter buttons
+    document.querySelectorAll('.filters button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const f = btn.getAttribute('data-filter') || btn.textContent.toLowerCase();
+        document.querySelectorAll('.card').forEach(c=>{
+          if(f==='all' || c.getAttribute('data-category')===f) c.style.display = 'flex'; else c.style.display='none';
+        })
+      })
+    });
+
+    // WhatsApp order link (change phone to your number)
+    const WA_NUMBER = '254700000000'; // <- replace with your number in international format
+    document.querySelectorAll('.buy').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const name = a.getAttribute('data-name');
+        const price = a.getAttribute('data-price');
+        const text = encodeURIComponent(`Hi, I want to order: ${name} - KSh ${price}. My name: \nSize (if shoes): \nDelivery address:`);
+        const url = `https://wa.me/${WA_NUMBER}?text=${text}`;
+        window.open(url,'_blank');
+      })
+    })
+  </script>
+</body>
+</html>
